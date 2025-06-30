@@ -1,0 +1,156 @@
+.heding_div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+}
+
+/* ? searbar==-- */
+
+.search_main_div {
+  width: 300px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+
+  /* background-color: var(--main-background-color-dark-green); */
+  background-color: var(--primary-color-lightgreen);
+
+  border-radius: 10px;
+}
+
+.input_box {
+  width: 80%;
+  height: 80%;
+}
+
+.input_box > input {
+  width: 100%;
+  height: 100%;
+  outline: none;
+  background-color: transparent;
+  border: none;
+}
+
+/* .tabell_bo {
+  width: 100%;
+} */
+
+.pagination_div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+/*? Hover effect on pagination items */
+.page-link:hover {
+  background-color: black !important;
+  color: white !important;
+}
+
+.page-link:focus {
+  background-color: black !important;
+  color: white !important;
+}
+
+/*? Active pagination item styling */
+/* .pagination_div .mdbpagination .mdbpaginationitem.active .mdbpaginationlink {
+} */
+
+.active > .page-link {
+  background-color: var(--primary-color-lightgreen) !important;
+  color: white !important;
+}
+
+/* .table_body_user {
+  height: 70%;
+  overflow: scroll;
+} */
+
+.table_body_user {
+  display: block;
+  max-height: 80%;
+  width: 101%;
+  overflow: auto;
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.table_body_user::-webkit-scrollbar {
+  display: none;
+  /* Hide scrollbar for Chrome, Safari, and Opera */
+}
+
+.tabell_bo.table_body_user {
+  overflow-x: auto;
+  /* Enable horizontal scrolling */
+  display: block;
+  /* Makes sure the div behaves as a block-level element */
+}
+.heding_div_tbn {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+.heding_div_tbn > h1,
+.addbtn_div > h1 {
+  font-size: 25px;
+  font-family: "BeVietnamPro-Bold";
+  color: var(--main-background-color-dark-green);
+  margin: 0 !important;
+}
+.name_div {
+  display: flex;
+  align-items: flex-start;
+}
+.profile_pic > span {
+  position: absolute;
+  color: var(--primary-color-lightgreen);
+  bottom: -5px;
+  right: -5px;
+  font-size: 20px;
+}
+
+.profile_pic {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.profile_pic > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  /* border: 1px solid var(--primary-color-lightgreen); */
+}
+@media screen and (max-width: 600px) {
+  .heding_div,
+  .heding_div_tbn {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .search_main_div {
+    width: 250px;
+    height: 40px;
+  }
+}
+
+.pagination_div {
+  width: 100% !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

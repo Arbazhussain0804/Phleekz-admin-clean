@@ -1,0 +1,351 @@
+.PostDetails_main_div {
+  width: 100%;
+  height: 70vh;
+
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1rem;
+}
+.other_PostDetails_main_div {
+  width: 70%;
+  height: 70vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+.PostDetails_post_inner_div {
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  box-shadow: 0 0 10px #000000a1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+  border-radius: 12px;
+}
+.PostDetails_post_inner_div::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
+}
+.post_show_div {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+.post_img_container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+.Post_img_show {
+  width: 100%;
+  height: 100%;
+}
+.post_img_container > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.post_overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000000a1; /* light black overlay */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.post_numbers_div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: white;
+}
+
+.post_show_div:hover .post_overlay {
+  opacity: 1;
+}
+/* NEW: Always show overlay if post is active */
+.active_post .post_overlay {
+  opacity: 1;
+}
+
+.likes_number_icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+}
+.like_icon {
+  color: var(--secondary-color-white);
+  font-family: "BeVietnamPro-SemiBold";
+}
+.likes_number_icon > p {
+  font-size: 14px;
+  color: var(--secondary-color-white);
+  margin-bottom: 0px !important;
+  font-family: "BeVietnamPro-SemiBold";
+}
+
+.PostDetails_comment_inner_div {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  box-shadow: 0 0 10px #000000a1;
+  overflow: hidden;
+}
+/* like & comment ka header div style end  here */
+.heading_of_PostDetails_comment_div {
+  flex-shrink: 0;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--main-background-color-dark-green);
+
+  z-index: 1;
+}
+.btn_divS {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+.Likes_btn_,
+.comments_btn_ {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 5px;
+  margin-bottom: 0 !important;
+  font-size: 16px;
+  color: var(--main-background-color-dark-green);
+  font-family: "BeVietnamPro-SemiBold";
+}
+.Likes_btn_ > svg,
+.comments_btn_ > svg {
+  font-size: 16px;
+  color: var(--main-background-color-dark-green);
+  font-family: "BeVietnamPro-SemiBold";
+}
+.Likes_btn_ {
+  padding-right: 15px;
+  border-right: 1px solid var(--main-background-color-dark-green);
+}
+.closed_btn {
+  cursor: pointer;
+  font-size: 20px;
+  color: var(--main-background-color-dark-green);
+  font-family: "BeVietnamPro-SemiBold";
+}
+
+.main_content_div_like_and_comments {
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  padding: 15px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+.main_content_div_like_and_comments::-webkit-scrollbar {
+  display: none;
+}
+/* like & comment ka header div style end  here */
+
+/* like user list  style start  here */
+.likes_user_list {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.likers_user_list {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 8px 0;
+  border-bottom: 1px solid var(--main-background-color-dark-green);
+}
+.user_data_div {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+}
+.image_div_of_users {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.image_div_of_users > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.user_name_and_id {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+}
+.user_name_and_id > h3 {
+  font-size: 15px;
+  margin: 0px !important;
+  font-family: "BeVietnamPro-SemiBold";
+  color: var(--main-background-color-dark-green);
+}
+.user_name_and_id > p {
+  font-size: 10px;
+  margin: 0 !important;
+  color: #717171;
+  font-family: "BeVietnamPro-Regular";
+}
+/* like user list  style end  here */
+
+/* comment  list  style start here */
+.comment_list_main_div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.Comments_list_inner_div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+}
+.user_comments_card {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 10px;
+}
+.user_img_div_for_comments {
+  width: 20px;
+  height: 20px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+.user_img_div_for_comments > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.main_text_area_div {
+  width: 90%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+}
+.comment_text_ {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #717171;
+  border-radius: 12px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+}
+.user_name_time_ {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+}
+.user_name_time_ > h3 {
+  font-size: 14px;
+  color: var(--main-background-color-dark-green);
+  font-family: "BeVietnamPro-SemiBold";
+  margin: 0 !important;
+}
+.user_name_time_ > span {
+  font-size: 12px;
+  color: #717171;
+  font-family: "BeVietnamPro-Regular";
+}
+.comments_text_area > p {
+  font-size: 12px;
+  color: #717171;
+  font-family: "BeVietnamPro-Regular";
+}
+.replay_main_list {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.heading_replay_btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+.heading_replay_btn > h2 {
+  font-size: 10px;
+  color: var(--main-background-color-dark-green);
+  font-family: "BeVietnamPro-SemiBold";
+  margin: 0 !important;
+  cursor: pointer;
+}
+.main_div_replies_list {
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.main_div_replies_list > h2 {
+  font-size: 10px;
+  color: var(--main-background-color-dark-green);
+  font-family: "BeVietnamPro-SemiBold";
+  margin: 0 !important;
+  cursor: pointer;
+}
+.comment_Delete_btn {
+  position: absolute;
+  right: 2px;
+  top: 2px;
+  font-size: 16px;
+  color: var(--main-background-color-dark-green);
+  cursor: pointer;
+}

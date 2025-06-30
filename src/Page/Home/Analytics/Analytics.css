@@ -1,0 +1,220 @@
+.Analytics_main_div {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  overflow-y: scroll;
+  gap: 10px;
+  padding: 10px;
+}
+.Analytics_main_div::-webkit-scrollbar {
+  display: none;
+  /* Hide scrollbar for Chrome, Safari, and Opera */
+}
+.first_div_of_Analytics_data {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 10px;
+}
+.second_div_of_Analytics_data {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 10px;
+}
+
+.Analytics_box_1,
+.Analytics_box_2,
+.Analytics_box_3,
+.Analytics_box_4,
+.Analytics_box_5,
+.Analytics_box_6 {
+  width: 100%;
+  height: 400px !important;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #ccc;
+}
+
+.Analytics_box_1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+  overflow: hidden;
+}
+.Analytics_box_2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  overflow: hidden;
+}
+.Analytics_box_1_heading_div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+.Analytics_box_2_heading_div {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+}
+.Analytics_box_1_heading_div > h2 {
+  font-size: 22px;
+  color: var(--main-background-color-dark-green);
+  font-family: "BeVietnamPro-Medium";
+  margin: 0 !important;
+}
+.Analytics_box_2_heading_div > h2 {
+  font-size: 20px;
+  color: var(--main-background-color-dark-green);
+  font-family: "BeVietnamPro-Medium";
+  margin: 0 !important;
+}
+.analytics_filters {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.analytics_dropdown_div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: white;
+  font-family: "BeVietnamPro-Regular";
+  outline: none;
+  text-align: start;
+}
+.analytics-dropdown {
+  border: none;
+  outline: none;
+}
+
+.engagement_table_container {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+/* Constrain height and make it scroll */
+.engagement_table_wrapper {
+  width: 100%;
+  max-height: 300px; /* adjust to your desired table-height */
+  overflow-y: auto;
+}
+.engagement_table_wrapper::-webkit-scrollbar {
+  display: none;
+  /* Hide scrollbar for Chrome, Safari, and Opera */
+}
+
+/* 2. Keep the table as a normal table */
+.engagement_table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+/* 3. Sticky header */
+.engagement_table thead th {
+  position: sticky;
+  top: 0;
+  background-color: var(--main-background-color-dark-green) !important;
+  color: white !important;
+  z-index: 1;
+  padding: 8px 12px;
+  border-bottom: 1px solid #eee;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Body rows */
+.engagement_table tbody tr {
+  background: white;
+}
+
+.engagement_table tbody tr:nth-child(odd) {
+  background: #6fc5ff68;
+}
+
+.engagement_table td {
+  padding: 8px 12px;
+  font-size: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+/* ? Analytics_box_3 */
+.Analytics_box_3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+  overflow: hidden;
+}
+.Analytics_box_3_heading_div {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+}
+.Analytics_box_3_heading_div > h2 {
+  font-size: 20px;
+  color: var(--main-background-color-dark-green);
+  font-family: "BeVietnamPro-Medium";
+  margin: 0 !important;
+}
+/* ? Analytics_box_4  */
+.Analytics_box_4 {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 1rem;
+  overflow: hidden;
+}
+
+.Analytics_box_4_heading_div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.Analytics_box_4_heading_div > h2 {
+  font-size: 20px;
+  color: var(--main-background-color-dark-green);
+  font-family: "BeVietnamPro-Medium";
+  margin: 0 !important;
+}
+
+.TH_index {
+  width: 30px; /* or 30px, depending on your design */
+  text-align: center;
+}
+
+.TD_index {
+  text-align: center;
+}

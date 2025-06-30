@@ -1,0 +1,11 @@
+node_modules/
+build/
+*.zip
+*.mp4
+*.mov
+*.avi
+*.ttf
+*.otf
+.DS_Store
+.env
+

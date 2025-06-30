@@ -1,0 +1,329 @@
+.main_post_details_div {
+  width: 100%;
+  height: 100%;
+  /* background-color: blueviolet; */
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.carDetails_heding_div {
+  width: 95%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.back_btn {
+  padding: 10px 20px;
+  border: 1px solid gray;
+  border-radius: 10px;
+  background-color: transparent;
+}
+
+.back_btn:hover {
+  background: var(--gradient-background);
+  transition: all 1s;
+}
+.btn_groups_of_userDetails {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.main_fram_div_ofuserdetails {
+  width: 70%;
+  height: 90%;
+  border-radius: 30px;
+
+  /* padding: 10px; */
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  /* border: 4px solid #797979; */
+  box-shadow: #0000008b 0px 0px 10px;
+}
+
+.Header_bg_main_div {
+  width: 100%;
+  height: 35%;
+  background-color: #a2a2a2;
+  /* overflow: hidden; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+}
+
+.mian_bg_img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.User_profile_img_and_other_ditels {
+  position: absolute;
+  bottom: -40px;
+  left: 20px;
+}
+
+.profile_img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #391bf2 0%, #e0212d 40%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: #000000bd 0px 0px 8px;
+  position: relative;
+}
+
+.profile_img > img {
+  width: 90%;
+  height: 90%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.Camera {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.header_bg_camera {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.user_details_of_persnol {
+  width: 85%;
+  padding: 3rem 0rem 10px 0rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.user_details_of_persnol > h1 {
+  font-size: 24px;
+  color: #181818;
+  font-family: "BeVietnamPro-Bold";
+  margin: 0;
+}
+
+.edit_mode_field {
+  border: 1px solid #878787;
+  width: 400px;
+  height: 40px;
+  /* padding: 5px; */
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+
+.edit_mode_username_field {
+  border: 1px solid #878787;
+  width: 300px;
+  height: 30px;
+  /* padding: 5px; */
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+
+.edit_mode_field > input {
+  width: 80%;
+  border: none;
+  background-color: transparent;
+  outline: none;
+  font-size: 24px;
+  color: #181818;
+  font-family: "BeVietnamPro-Bold";
+}
+
+.edit_mode_username_field > input {
+  width: 70%;
+  border: none;
+  background-color: transparent;
+  outline: none;
+  font-size: 16px;
+  color: #181818;
+  font-family: "BeVietnamPro-Bold";
+}
+
+.edit_mode_bio_field {
+  border: 1px solid #878787;
+  width: 100%;
+  height: 100px;
+  /* padding: 5px; */
+  border-radius: 12px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+
+.edit_mode_bio_field > textarea {
+  margin: 5px;
+  width: 90%;
+  height: 90px;
+  resize: none;
+  border: none;
+  background-color: transparent;
+  outline: none;
+  font-size: 14px;
+  color: #181818;
+  font-family: "BeVietnamPro-Medium";
+}
+
+.save_btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  height: 100%;
+  background: var(--gradient-background);
+  cursor: pointer;
+}
+
+.save_btn > p {
+  font-size: 14px;
+  font-family: "BeVietnamPro-Medium";
+  color: var(--secondary-color-white);
+  text-transform: capitalize;
+}
+
+p {
+  margin-bottom: 0rem !important;
+}
+
+.user_details_of_persnol > h4 {
+  font-size: 16px;
+  color: #666262;
+  font-family: "BeVietnamPro-Medium";
+}
+
+.user_details_of_persnol > p {
+  font-size: 14px;
+  color: #666262;
+  font-family: "BeVietnamPro-Medium";
+}
+
+.user_details_of_persnol > h1 > span {
+  font-size: 20px;
+  color: #666262;
+  font-family: "BeVietnamPro-Medium";
+  cursor: pointer;
+}
+
+.User_deyails_ofnumber {
+  width: 90%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  place-items: center;
+  gap: 1.1rem;
+  padding-bottom: 1rem;
+}
+
+.Total_number_show_div {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 1rem;
+  border-radius: 13px;
+  /* background: var(--gradient-background); */
+}
+
+.Total_number_show_div > h2 {
+  font-size: 16px;
+  font-family: "BeVietnamPro-Medium";
+  color: var(--main-background-color-dark-green);
+  text-transform: capitalize;
+  /* text-shadow: #000000fe 0px 0px 5px; */
+}
+
+.Total_number_show_div > p {
+  font-size: 14px;
+  font-family: "BeVietnamPro-Medium";
+  color: var(--main-background-color-dark-green);
+  text-transform: capitalize;
+  /* text-shadow: #000000fe 0px 0px 5px; */
+}
+
+.line_btwn {
+  width: 3px;
+  height: 100%;
+  background: var(--gradient-background);
+}
+
+.bio_text_div {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.btn_active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px 20px;
+
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+  transform: translate(1);
+  background-color: var(--main-background-color-dark-green) !important;
+  color: #ffffff;
+  border: 1px solid #a2a2a2;
+}
+@media screen and (max-width: 767px) {
+  .main_fram_div_ofuserdetails {
+    width: 100%;
+    height: 100%;
+  }
+
+  .main_post_details_div {
+    justify-content: center;
+  }
+
+  .Total_number_show_div {
+    padding: 10px;
+  }
+
+  .Total_number_show_div > h2 {
+    font-size: 14px;
+  }
+
+  .User_deyails_ofnumber {
+    padding: 10px 15px;
+    grid-template-columns: repeat(1, 1fr);
+    overflow-y: scroll;
+  }
+}
