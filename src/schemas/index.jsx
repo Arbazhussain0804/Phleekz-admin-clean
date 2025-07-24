@@ -39,3 +39,18 @@ export const MailSchemas = Yup.object().shape({
   Title: Yup.string().required("Please enter Subject"),
   Desc: Yup.string().required("Please enter Message "),
 });
+export const AddFaqsSchemas = Yup.object().shape({
+  question: Yup.string().required("Please enter your question"),
+  answer: Yup.string().required("Please enter your answer"),
+});
+export const AddBusinessCategorySchemas = Yup.object().shape({
+  category: Yup.string().required("Please enter your business category"),
+});
+export const AddSectionSchemas = Yup.object().shape({
+  section: Yup.string().required("Please enter your section name"),
+});
+
+export const AddSectionItemsSchemas = Yup.object().shape({
+  question: Yup.string().required("Please enter your question"),
+  answer: Yup.string().required("Please enter your answer"),
+});

@@ -27,6 +27,10 @@ import { IoIosArrowDown } from "react-icons/io";
 import { HiMenuAlt1 } from "react-icons/hi";
 import { TfiVideoClapper } from "react-icons/tfi";
 import { IoIosImages } from "react-icons/io";
+import { MdOutlineQuestionAnswer } from "react-icons/md";
+import { FaBriefcase } from "react-icons/fa";
+import { FaList } from "react-icons/fa6";
+import { BiSupport } from "react-icons/bi";
 
 const menuItems = [
   {
@@ -92,9 +96,24 @@ const menuItems = [
     icon: <FaHashtag />,
   },
   {
+    name: "Business Category",
+    link: "/Home/BusinessCategory",
+    icon: <FaBriefcase />,
+  },
+  {
+    name: "Sections",
+    link: "/Home/Sections",
+    icon: <FaList />,
+  },
+  {
     name: "Analytics",
     link: "/Home/Analytics",
     icon: <AiOutlinePieChart />,
+  },
+  {
+    name: "Support",
+    link: "/Home/Supports",
+    icon: <BiSupport />,
   },
   {
     name: "Notifications",
@@ -108,7 +127,7 @@ const menuItems = [
   },
   {
     name: "Ads controller",
-    link: "/Project - THE PET SLEUTH: Setting up the admin panel for this projectAdscontroller",
+    link: "/",
     icon: <FaBullhorn />,
     newTab: true,
   },
@@ -116,6 +135,11 @@ const menuItems = [
     name: "CMS",
     icon: <MdOutlineWeb />,
     items: [
+      {
+        name: "Faq's",
+        link: "/Home/Faqs",
+        icon: <MdOutlineQuestionAnswer />,
+      },
       {
         name: "Terms & Condition",
         link: "/Home/Trems&Condition",

@@ -30,6 +30,41 @@ const GlobalContextProvider = ({ children }) => {
   const [CommentDeletemodel, setCommentDeletemodel] = useState(false);
   const [seletedCommentsData, setseletedCommentsData] = useState();
 
+  // ? Faqs all models
+  const [FaqsAddModel, setFaqsAddModel] = useState(false);
+  const [FaqsDeleteModel, setFaqsDeleteModel] = useState(false);
+  const [FaqsEditModel, setFaqsEditModel] = useState(false);
+  const [SelectedFaqsData, setSelectedFaqsData] = useState();
+  const [FaqsReload, setFaqsReload] = useState(false);
+  // ? Business category all models
+  const [BusinessCategoryAddModel, setBusinessCategoryAddModel] =
+    useState(false);
+  const [BusinessCategoryDeleteModel, setBusinessCategoryDeleteModel] =
+    useState(false);
+  const [BusinessCategoryEditModel, setBusinessCategoryEditModel] =
+    useState(false);
+  const [SelectedBusinessCategoryData, setSelectedBusinessCategoryData] =
+    useState();
+  const [BusinessCategoryReload, setBusinessCategoryReload] = useState(false);
+  // ? Sections data all models
+  const [SectionsDataAddModel, setSectionsDataAddModel] = useState(false);
+  const [SectionsDataDeleteModel, setSectionsDataDeleteModel] = useState(false);
+  const [SectionsDataEditModel, setSectionsDataEditModel] = useState(false);
+  const [SelectedSectionsData, setSelectedSectionsData] = useState();
+  const [SectionsDataReload, setSectionsDataReload] = useState(false);
+  // ? Sections items all models
+  const [SectionsItemsAddModel, setSectionsItemsAddModel] = useState(false);
+  const [SectionsItemsDeleteModel, setSectionsItemsDeleteModel] =
+    useState(false);
+  const [SectionsItemsEditModel, setSectionsItemsEditModel] = useState(false);
+  const [SelectedSectionsItemsData, setSelectedSectionsItemsData] = useState();
+  const [SectionsItemsReload, setSectionsItemsReload] = useState(false);
+
+  // ? Supports all models
+  const [SupportsViewModel, setSupportsViewModel] = useState(false);
+  const [SupportsCheckModel, setSupportsCheckModel] = useState(false);
+  const [SupportsReload, setSupportsReload] = useState(false);
+  const [SelectedSupportsdata, setSelectedSupportsdata] = useState();
   return (
     <GlobalContext.Provider
       value={{
@@ -86,6 +121,63 @@ const GlobalContextProvider = ({ children }) => {
         setCommentDeletemodel,
         seletedCommentsData,
         setseletedCommentsData,
+
+        // ? for Faqs all models
+        FaqsAddModel,
+        setFaqsAddModel,
+        FaqsDeleteModel,
+        setFaqsDeleteModel,
+        FaqsEditModel,
+        setFaqsEditModel,
+        SelectedFaqsData,
+        setSelectedFaqsData,
+        FaqsReload,
+        setFaqsReload,
+
+        // ? for Business category all models
+        BusinessCategoryAddModel,
+        setBusinessCategoryAddModel,
+        BusinessCategoryDeleteModel,
+        setBusinessCategoryDeleteModel,
+        BusinessCategoryEditModel,
+        setBusinessCategoryEditModel,
+        SelectedBusinessCategoryData,
+        setSelectedBusinessCategoryData,
+        BusinessCategoryReload,
+        setBusinessCategoryReload,
+
+        // ? for sections data all models
+        SectionsDataAddModel,
+        setSectionsDataAddModel,
+        SectionsDataDeleteModel,
+        setSectionsDataDeleteModel,
+        SectionsDataEditModel,
+        setSectionsDataEditModel,
+        SelectedSectionsData,
+        setSelectedSectionsData,
+        SectionsDataReload,
+        setSectionsDataReload,
+
+        // ? for sections items All models
+        SectionsItemsAddModel,
+        setSectionsItemsAddModel,
+        SectionsItemsEditModel,
+        setSectionsItemsEditModel,
+        SectionsItemsDeleteModel,
+        setSectionsItemsDeleteModel,
+        SelectedSectionsItemsData,
+        setSelectedSectionsItemsData,
+        SectionsItemsReload,
+        setSectionsItemsReload,
+        // ? for supports  All models
+        SupportsViewModel,
+        setSupportsViewModel,
+        SupportsCheckModel,
+        setSupportsCheckModel,
+        SupportsReload,
+        setSupportsReload,
+        SelectedSupportsdata,
+        setSelectedSupportsdata,
       }}
     >
       {children}

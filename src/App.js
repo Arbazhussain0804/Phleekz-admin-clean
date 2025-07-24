@@ -15,18 +15,32 @@ import ReportedPost from "./Page/Home/PostManagement/ReportedPost/index.jsx";
 import Privacypolicys from "./Page/Home/Privacy/index.jsx";
 import TermsConditions from "./Page/Home/Trems/index.jsx";
 import {
+  AddBusinessCategoryModel,
+  AddFaqsModel,
   AddHanstagModel,
+  AddSectionItemsModel,
+  AddSectionModel,
   BanuserModel,
   BlueTickApprovedModel,
   BlueTickRejectModel,
   ChangepasswordModel,
+  DeleteBusinessCategoryModel,
   DeleteCommnetsModel,
+  DeleteFaqsModel,
   DeleteHanstagModel,
+  DeleteSectionItemsModel,
+  DeleteSectionModel,
   DeleteuserModel,
+  EditBusinessCategoryModel,
+  EditFaqsModel,
   EditHanstagModel,
+  EditSectionItemsModel,
+  EditSectionModel,
   ForgotPasswordModel,
   LogoutModel,
   PostDetailsModel,
+  SupportCheckModel,
+  SupportViewDataModel,
   UnBanModel,
 } from "./Common/Model/index.jsx";
 import Profile from "./Page/Home/Profile/index.jsx";
@@ -40,6 +54,11 @@ import Mail from "./Page/Home/Mail/Mail.jsx";
 import Analytics from "./Page/Home/Analytics/Analytics.jsx";
 import PostwiseDetails from "./Page/Home/PostManagement/PostWiseDetails/PostWiseDetails.jsx";
 import Adscontroller from "./Page/Adscontroller/Adscontroller.jsx";
+import Faqs from "./Page/Home/Faqs/Faqs.jsx";
+import BusinessCategory from "./Page/Home/BusinessCategory/BusinessCategory.jsx";
+import Sections from "./Page/Home/SectionsLists/Sections/Sections.jsx";
+import SectionById from "./Page/Home/SectionsLists/SectionById/SectionById.jsx";
+import Supports from "./Page/Home/Supports/Supports.jsx";
 function App() {
   return (
     <div className="App">
@@ -58,6 +77,27 @@ function App() {
         <BlueTickRejectModel />
         <UnBanModel />
         <DeleteCommnetsModel />
+
+        {/* ? Faqs all model  */}
+        <AddFaqsModel />
+        <EditFaqsModel />
+        <DeleteFaqsModel />
+        {/* ? Business category all model */}
+        <AddBusinessCategoryModel />
+        <DeleteBusinessCategoryModel />
+        <EditBusinessCategoryModel />
+        {/* Sections All models */}
+        <AddSectionModel />
+        <EditSectionModel />
+        <DeleteSectionModel />
+
+        {/* Sections items all model  */}
+        <AddSectionItemsModel />
+        <EditSectionItemsModel />
+        <DeleteSectionItemsModel />
+        <SupportCheckModel />
+        {/* Support all model */}
+        <SupportViewDataModel />
         <Routes>
           <Route path="/" element={<Navigate replace to="/Login" />} />
           <Route path="/Login" element={<Login />} />
@@ -71,11 +111,16 @@ function App() {
             <Route path="/Home/Userlist" element={<Userlist />} />
             <Route path="/Home/UserDetails" element={<UserDetails />} />
             <Route path="/Home/Hastag" element={<Hastag />} />
+            <Route
+              path="/Home/BusinessCategory"
+              element={<BusinessCategory />}
+            />
             <Route path="/Home/Postlist" element={<Grouplist />} />
             <Route path="/Home/Playlist" element={<Playlist />} />
             <Route path="/Home/PostwiseDetails" element={<PostwiseDetails />} />
             <Route path="/Home/ReportedPost" element={<ReportedPost />} />
             <Route path="/Home/Trems&Condition" element={<TermsConditions />} />
+            <Route path="/Home/Faqs" element={<Faqs />} />
             <Route path="/Home/PrivacyPolicy" element={<Privacypolicys />} />
             <Route path="/Home/Profile" element={<Profile />} />
             <Route
@@ -97,6 +142,9 @@ function App() {
             <Route path="/Home/Notification" element={<Notification />} />
             <Route path="/Home/Mail" element={<Mail />} />
             <Route path="/Home/Analytics" element={<Analytics />} />
+            <Route path="/Home/Sections" element={<Sections />} />
+            <Route path="/Home/Sections-data-by-id" element={<SectionById />} />
+            <Route path="/Home/Supports" element={<Supports />} />
           </Route>
         </Routes>
       </GlobalContextProvider>

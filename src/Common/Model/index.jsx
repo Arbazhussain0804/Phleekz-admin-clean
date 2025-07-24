@@ -9,6 +9,10 @@ import {
   AddHastagSchemas,
   BanuserSchemas,
   BlueTickRejectSchemas,
+  AddFaqsSchemas,
+  AddBusinessCategorySchemas,
+  AddSectionSchemas,
+  AddSectionItemsSchemas,
 } from "../../schemas/index";
 import axios from "../../Common/Api/Api";
 import { useFormik } from "formik";
@@ -16,6 +20,7 @@ import { toast, Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import Backdrop from "@mui/material/Backdrop";
 import Loader from "../loader/index";
+import defulteImage from "../../Assets/Logo.png";
 
 export const ForgotPasswordModel = () => {
   const { forgotPasswordModel, setForgotPasswordModel } =
@@ -1253,6 +1258,1787 @@ export const DeleteCommnetsModel = () => {
               variant="primary"
               style={{ background: "var(--primary-color-lightgreen)" }}
               onClick={() => handleClose()}
+            >
+              Yes
+            </Button>
+          </div>
+        </Modal.Body>
+      </Modal>
+      {loading && (
+        <div>
+          <Backdrop
+            sx={{
+              color: "#fff",
+              zIndex: (theme) => theme.zIndex.drawer + 1,
+              backgroundColor: "#000000bd",
+            }}
+            open={true}
+          >
+            <Loader />
+          </Backdrop>
+        </div>
+      )}
+    </>
+  );
+};
+
+// ! Faqs all models
+
+// ? Add Faqs model start here
+export const AddFaqsModel = () => {
+  const { FaqsAddModel, setFaqsAddModel, FaqsReload, setFaqsReload } =
+    useContext(GlobalContext);
+  const [loading, setloading] = useState(false);
+
+  const handleClose = () => {
+    setFaqsAddModel(false);
+  };
+
+  const initialValues = {
+    question: "",
+    answer: "",
+  };
+
+  const MyToken = JSON.parse(localStorage.getItem("MYtokan"));
+  const onSubmit = async (value, { resetForm }) => {
+    setloading(true);
+    try {
+      const Response = await axios.post(
+        "cms/manage-faq",
+        {
+          type: "Add",
+          question: values.question,
+          answer: values.answer,
+          id: 0,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `${MyToken}`,
+          },
+        }
+      );
+      console.log("🚀 ~ onSubmit ~ Response:", Response);
+      resetForm();
+      setFaqsReload(true);
+      setloading(false);
+      handleClose();
+    } catch (error) {
+      console.log("🚀 ~ error:", error);
+      setloading(false);
+    }
+  };
+  const {
+    values,
+    handleBlur,
+    handleChange: formikHandleChange,
+    touched,
+    handleSubmit,
+    resetForm,
+    errors,
+  } = useFormik({
+    initialValues: initialValues,
+    validationSchema: AddFaqsSchemas,
+    onSubmit,
+  });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    formikHandleChange({
+      target: {
+        name,
+        value,
+      },
+    });
+  };
+
+  return (
+    <>
+      <Modal
+        size="md"
+        show={FaqsAddModel}
+        onHide={handleClose}
+        aria-labelledby="contained-modal-title-vcenter"
+        backdrop="static"
+        centered
+        style={{ backgroundColor: "rgba(32, 32, 32, 0.55)" }}
+      >
+        <Modal.Header closeButton className="model_title">
+          <Modal.Title style={{ textAlign: "center" }}>Add Faqs</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="modelbg_hastag">
+          <form action="" className="main_hastag_div" onSubmit={handleSubmit}>
+            <div className="main_input_container">
+              <label htmlFor=""> Add Question</label>
+              <div className="Input_box">
+                <input
+                  type="text"
+                  name="question"
+                  placeholder="Add Question"
+                  value={values.question}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+              </div>
+              {errors.question && touched.question ? (
+                <p className="errors_msg_p">{errors.question} </p>
+              ) : null}
+            </div>
+            <div className="main_input_container">
+              <label htmlFor=""> Add Answer</label>
+              <div className="textarea_box">
+                <textarea
+                  name="answer"
+                  placeholder="Add Answer"
+                  value={values.answer}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                ></textarea>
+              </div>
+              {errors.answer && touched.answer ? (
+                <p className="errors_msg_p">{errors.answer} </p>
+              ) : null}
+            </div>
+            <div className="btn_of_delte_model">
+              <Button
+                type="submit"
+                variant="primary"
+                style={{ background: "var(--primary-color-lightgreen)" }}
+              >
+                Submit
+              </Button>
+            </div>
+          </form>
+        </Modal.Body>
+      </Modal>
+      {loading && (
+        <div>
+          <Backdrop
+            sx={{
+              color: "#fff",
+              zIndex: (theme) => theme.zIndex.drawer + 1,
+              backgroundColor: "#000000bd",
+            }}
+            open={true}
+          >
+            <Loader />
+          </Backdrop>
+        </div>
+      )}
+    </>
+  );
+};
+// ? Add Faqs model end here
+// ? Edit Faqs model start here
+export const EditFaqsModel = () => {
+  const {
+    FaqsEditModel,
+    setFaqsEditModel,
+    SelectedFaqsData,
+    setSelectedFaqsData,
+    FaqsReload,
+    setFaqsReload,
+  } = useContext(GlobalContext);
+  const [loading, setloading] = useState(false);
+
+  const handleClose = () => {
+    setFaqsEditModel(false);
+  };
+
+  const initialValues = {
+    question: "",
+    answer: "",
+  };
+
+  const MyToken = JSON.parse(localStorage.getItem("MYtokan"));
+  const onSubmit = async (value, { resetForm }) => {
+    setloading(true);
+    try {
+      const Response = await axios.post(
+        "cms/manage-faq",
+        {
+          type: "Edit",
+          question: values.question,
+          answer: values.answer,
+          id: SelectedFaqsData.id,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `${MyToken}`,
+          },
+        }
+      );
+      console.log("🚀 ~ onSubmit ~ Response:", Response);
+      resetForm();
+      setFaqsReload(true);
+      setloading(false);
+      handleClose();
+    } catch (error) {
+      console.log("🚀 ~ error:", error);
+      setloading(false);
+    }
+  };
+  const {
+    values,
+    handleBlur,
+    handleChange: formikHandleChange,
+    touched,
+    handleSubmit,
+    resetForm,
+    errors,
+    setValues,
+  } = useFormik({
+    initialValues: initialValues,
+    validationSchema: AddFaqsSchemas,
+    onSubmit,
+  });
+  useEffect(() => {
+    if (SelectedFaqsData) {
+      setValues({
+        question: SelectedFaqsData?.question,
+        answer: SelectedFaqsData?.answer,
+      });
+    }
+  }, [SelectedFaqsData, setValues]);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    formikHandleChange({
+      target: {
+        name,
+        value,
+      },
+    });
+  };
+
+  return (
+    <>
+      <Modal
+        size="md"
+        show={FaqsEditModel}
+        onHide={handleClose}
+        aria-labelledby="contained-modal-title-vcenter"
+        backdrop="static"
+        centered
+        style={{ backgroundColor: "rgba(32, 32, 32, 0.55)" }}
+      >
+        <Modal.Header closeButton className="model_title">
+          <Modal.Title style={{ textAlign: "center" }}>Edit Faqs</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="modelbg_hastag">
+          <form action="" className="main_hastag_div" onSubmit={handleSubmit}>
+            <div className="main_input_container">
+              <label htmlFor=""> Edit Question</label>
+              <div className="Input_box">
+                <input
+                  type="text"
+                  name="question"
+                  placeholder="Edit Question"
+                  value={values.question}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+              </div>
+              {errors.question && touched.question ? (
+                <p className="errors_msg_p">{errors.question} </p>
+              ) : null}
+            </div>
+            <div className="main_input_container">
+              <label htmlFor=""> Edit Answer</label>
+              <div className="textarea_box">
+                <textarea
+                  name="answer"
+                  placeholder="Edit Answer"
+                  value={values.answer}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                ></textarea>
+              </div>
+              {errors.answer && touched.answer ? (
+                <p className="errors_msg_p">{errors.answer} </p>
+              ) : null}
+            </div>
+            <div className="btn_of_delte_model">
+              <Button
+                type="submit"
+                variant="primary"
+                style={{ background: "var(--primary-color-lightgreen)" }}
+              >
+                Submit
+              </Button>
+            </div>
+          </form>
+        </Modal.Body>
+      </Modal>
+      {loading && (
+        <div>
+          <Backdrop
+            sx={{
+              color: "#fff",
+              zIndex: (theme) => theme.zIndex.drawer + 1,
+              backgroundColor: "#000000bd",
+            }}
+            open={true}
+          >
+            <Loader />
+          </Backdrop>
+        </div>
+      )}
+    </>
+  );
+};
+// ? Edit Faqs model end here
+//? delete Faqs model start here
+export const DeleteFaqsModel = () => {
+  const {
+    FaqsDeleteModel,
+    setFaqsDeleteModel,
+    SelectedFaqsData,
+    setSelectedFaqsData,
+    FaqsReload,
+    setFaqsReload,
+  } = useContext(GlobalContext);
+  const [loading, setloading] = useState(false);
+
+  const handleClose = () => {
+    setFaqsDeleteModel(false);
+  };
+
+  const MyToken = JSON.parse(localStorage.getItem("MYtokan"));
+  const DeleteFaqsapi = async () => {
+    setloading(true);
+    try {
+      const Response = await axios.post(
+        "cms/manage-faq",
+        {
+          type: "Delete",
+          question: SelectedFaqsData.question,
+          answer: SelectedFaqsData.answer,
+          id: SelectedFaqsData.id,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `${MyToken}`,
+          },
+        }
+      );
+
+      setFaqsReload(true);
+      setloading(false);
+      handleClose();
+    } catch (error) {
+      console.log("🚀 ~ error:", error);
+      setloading(false);
+    }
+  };
+  const handleDeletcall = () => {
+    DeleteFaqsapi();
+    handleClose();
+  };
+
+  return (
+    <>
+      <Modal
+        size="sm"
+        show={FaqsDeleteModel}
+        onHide={handleClose}
+        aria-labelledby="contained-modal-title-vcenter"
+        backdrop="static"
+        centered
+        style={{ backgroundColor: "rgba(32, 32, 32, 0.55)" }}
+      >
+        <Modal.Header closeButton className="model_title">
+          <Modal.Title style={{ textAlign: "center" }}>Delete Faqs</Modal.Title>
+        </Modal.Header>
+        <Modal.Body closeButton className="modelbg">
+          <div className="Delete_text_p">
+            <p>Are you sure, you want to Delete this Faq ?</p>
+          </div>
+
+          <div className="btn_of_delte_model">
+            <Button variant="secondary" onClick={handleClose}>
+              No
+            </Button>
+            <Button
+              variant="primary"
+              style={{ background: "var(--primary-color-lightgreen)" }}
+              onClick={() => handleDeletcall()}
+            >
+              Yes
+            </Button>
+          </div>
+        </Modal.Body>
+      </Modal>
+      {loading && (
+        <div>
+          <Backdrop
+            sx={{
+              color: "#fff",
+              zIndex: (theme) => theme.zIndex.drawer + 1,
+              backgroundColor: "#000000bd",
+            }}
+            open={true}
+          >
+            <Loader />
+          </Backdrop>
+        </div>
+      )}
+    </>
+  );
+};
+// ? Delete Faqs model end here
+
+// ! Business Category all model
+
+// ? Add Business Category model start here
+export const AddBusinessCategoryModel = () => {
+  const {
+    BusinessCategoryAddModel,
+    setBusinessCategoryAddModel,
+    BusinessCategoryReload,
+    setBusinessCategoryReload,
+  } = useContext(GlobalContext);
+  const [loading, setloading] = useState(false);
+
+  const handleClose = () => {
+    setBusinessCategoryAddModel(false);
+  };
+
+  const initialValues = {
+    category: "",
+  };
+
+  const MyToken = JSON.parse(localStorage.getItem("MYtokan"));
+  const onSubmit = async (value, { resetForm }) => {
+    setloading(true);
+    try {
+      const Response = await axios.post(
+        "master/manage-business-category",
+        {
+          type: "Add",
+          name: values.category,
+          id: 0,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `${MyToken}`,
+          },
+        }
+      );
+      console.log("🚀 ~ onSubmit ~ Response:", Response);
+      resetForm();
+      setBusinessCategoryReload(true);
+      setloading(false);
+      handleClose();
+    } catch (error) {
+      console.log("🚀 ~ error:", error);
+      setloading(false);
+    }
+  };
+  const {
+    values,
+    handleBlur,
+    handleChange: formikHandleChange,
+    touched,
+    handleSubmit,
+    resetForm,
+    errors,
+  } = useFormik({
+    initialValues: initialValues,
+    validationSchema: AddBusinessCategorySchemas,
+    onSubmit,
+  });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    formikHandleChange({
+      target: {
+        name,
+        value,
+      },
+    });
+  };
+
+  return (
+    <>
+      <Modal
+        size="md"
+        show={BusinessCategoryAddModel}
+        onHide={handleClose}
+        aria-labelledby="contained-modal-title-vcenter"
+        backdrop="static"
+        centered
+        style={{ backgroundColor: "rgba(32, 32, 32, 0.55)" }}
+      >
+        <Modal.Header closeButton className="model_title">
+          <Modal.Title style={{ textAlign: "center" }}>
+            Add Business Category
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="modelbg_hastag">
+          <form action="" className="main_hastag_div" onSubmit={handleSubmit}>
+            <div className="main_input_container">
+              <label htmlFor=""> Add Category</label>
+              <div className="Input_box">
+                <input
+                  type="text"
+                  name="category"
+                  placeholder="Add Category"
+                  value={values.category}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+              </div>
+              {errors.category && touched.category ? (
+                <p className="errors_msg_p">{errors.category} </p>
+              ) : null}
+            </div>
+            <div className="btn_of_delte_model">
+              <Button
+                type="submit"
+                variant="primary"
+                style={{ background: "var(--primary-color-lightgreen)" }}
+              >
+                Submit
+              </Button>
+            </div>
+          </form>
+        </Modal.Body>
+      </Modal>
+      {loading && (
+        <div>
+          <Backdrop
+            sx={{
+              color: "#fff",
+              zIndex: (theme) => theme.zIndex.drawer + 1,
+              backgroundColor: "#000000bd",
+            }}
+            open={true}
+          >
+            <Loader />
+          </Backdrop>
+        </div>
+      )}
+    </>
+  );
+};
+// ? Add Business Category model end here
+// ? Edit Business Category model start here
+export const EditBusinessCategoryModel = () => {
+  const {
+    BusinessCategoryEditModel,
+    setBusinessCategoryEditModel,
+    SelectedBusinessCategoryData,
+    setSelectedBusinessCategoryData,
+    BusinessCategoryReload,
+    setBusinessCategoryReload,
+  } = useContext(GlobalContext);
+  const [loading, setloading] = useState(false);
+
+  const handleClose = () => {
+    setBusinessCategoryEditModel(false);
+  };
+
+  const initialValues = {
+    category: "",
+  };
+
+  const MyToken = JSON.parse(localStorage.getItem("MYtokan"));
+  const onSubmit = async (value, { resetForm }) => {
+    setloading(true);
+    try {
+      const Response = await axios.post(
+        "master/manage-business-category",
+        {
+          type: "Edit",
+          name: values.category,
+          id: SelectedBusinessCategoryData.id,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `${MyToken}`,
+          },
+        }
+      );
+      console.log("🚀 ~ onSubmit ~ Response:", Response);
+      resetForm();
+      setBusinessCategoryReload(true);
+      setloading(false);
+      handleClose();
+    } catch (error) {
+      console.log("🚀 ~ error:", error);
+      setloading(false);
+    }
+  };
+  const {
+    values,
+    handleBlur,
+    handleChange: formikHandleChange,
+    touched,
+    handleSubmit,
+    resetForm,
+    errors,
+    setValues,
+  } = useFormik({
+    initialValues: initialValues,
+    validationSchema: AddBusinessCategorySchemas,
+    onSubmit,
+  });
+  useEffect(() => {
+    if (SelectedBusinessCategoryData) {
+      setValues({
+        category: SelectedBusinessCategoryData?.name,
+      });
+    }
+  }, [SelectedBusinessCategoryData, setValues]);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    formikHandleChange({
+      target: {
+        name,
+        value,
+      },
+    });
+  };
+
+  return (
+    <>
+      <Modal
+        size="md"
+        show={BusinessCategoryEditModel}
+        onHide={handleClose}
+        aria-labelledby="contained-modal-title-vcenter"
+        backdrop="static"
+        centered
+        style={{ backgroundColor: "rgba(32, 32, 32, 0.55)" }}
+      >
+        <Modal.Header closeButton className="model_title">
+          <Modal.Title style={{ textAlign: "center" }}>
+            Edit Business Category
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="modelbg_hastag">
+          <form action="" className="main_hastag_div" onSubmit={handleSubmit}>
+            <div className="main_input_container">
+              <label htmlFor=""> Edit Category</label>
+              <div className="Input_box">
+                <input
+                  type="text"
+                  name="category"
+                  placeholder="Edit Category"
+                  value={values.category}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+              </div>
+              {errors.category && touched.category ? (
+                <p className="errors_msg_p">{errors.category} </p>
+              ) : null}
+            </div>
+            <div className="btn_of_delte_model">
+              <Button
+                type="submit"
+                variant="primary"
+                style={{ background: "var(--primary-color-lightgreen)" }}
+              >
+                Submit
+              </Button>
+            </div>
+          </form>
+        </Modal.Body>
+      </Modal>
+      {loading && (
+        <div>
+          <Backdrop
+            sx={{
+              color: "#fff",
+              zIndex: (theme) => theme.zIndex.drawer + 1,
+              backgroundColor: "#000000bd",
+            }}
+            open={true}
+          >
+            <Loader />
+          </Backdrop>
+        </div>
+      )}
+    </>
+  );
+};
+// ? Edit Business Category model end here
+// ? Delete Business Category model start here
+export const DeleteBusinessCategoryModel = () => {
+  const {
+    BusinessCategoryDeleteModel,
+    setBusinessCategoryDeleteModel,
+    SelectedBusinessCategoryData,
+    setSelectedBusinessCategoryData,
+    BusinessCategoryReload,
+    setBusinessCategoryReload,
+  } = useContext(GlobalContext);
+  const [loading, setloading] = useState(false);
+
+  const handleClose = () => {
+    setBusinessCategoryDeleteModel(false);
+  };
+
+  const MyToken = JSON.parse(localStorage.getItem("MYtokan"));
+  const DeleteBusinessCategoryapi = async () => {
+    setloading(true);
+    try {
+      const Response = await axios.post(
+        "master/manage-business-category",
+        {
+          type: "Delete",
+          name: SelectedBusinessCategoryData.name,
+          id: SelectedBusinessCategoryData.id,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `${MyToken}`,
+          },
+        }
+      );
+
+      setBusinessCategoryReload(true);
+      setloading(false);
+      handleClose();
+    } catch (error) {
+      console.log("🚀 ~ error:", error);
+      setloading(false);
+    }
+  };
+  const handleDeletcall = () => {
+    DeleteBusinessCategoryapi();
+    handleClose();
+  };
+
+  return (
+    <>
+      <Modal
+        size="md"
+        show={BusinessCategoryDeleteModel}
+        onHide={handleClose}
+        aria-labelledby="contained-modal-title-vcenter"
+        backdrop="static"
+        centered
+        style={{ backgroundColor: "rgba(32, 32, 32, 0.55)" }}
+      >
+        <Modal.Header closeButton className="model_title">
+          <Modal.Title>Delete Business Category</Modal.Title>
+        </Modal.Header>
+        <Modal.Body closeButton className="modelbg">
+          <div className="Delete_text_p">
+            <p>Are you sure, you want to Delete this Business Category ?</p>
+          </div>
+
+          <div className="btn_of_delte_model">
+            <Button variant="secondary" onClick={handleClose}>
+              No
+            </Button>
+            <Button
+              variant="primary"
+              style={{ background: "var(--primary-color-lightgreen)" }}
+              onClick={() => handleDeletcall()}
+            >
+              Yes
+            </Button>
+          </div>
+        </Modal.Body>
+      </Modal>
+      {loading && (
+        <div>
+          <Backdrop
+            sx={{
+              color: "#fff",
+              zIndex: (theme) => theme.zIndex.drawer + 1,
+              backgroundColor: "#000000bd",
+            }}
+            open={true}
+          >
+            <Loader />
+          </Backdrop>
+        </div>
+      )}
+    </>
+  );
+};
+// ? Delete Business Category model end here
+
+// ! Sections All models
+// ? Add Section model start here
+export const AddSectionModel = () => {
+  const {
+    SectionsDataAddModel,
+    setSectionsDataAddModel,
+
+    SectionsDataReload,
+    setSectionsDataReload,
+  } = useContext(GlobalContext);
+  const [loading, setloading] = useState(false);
+
+  const handleClose = () => {
+    setSectionsDataAddModel(false);
+  };
+
+  const initialValues = {
+    section: "",
+  };
+
+  const MyToken = JSON.parse(localStorage.getItem("MYtokan"));
+  const onSubmit = async (value, { resetForm }) => {
+    setloading(true);
+    try {
+      const Response = await axios.post(
+        "section/manage-section",
+        {
+          type: "Add",
+          name: values.section,
+          id: 0,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `${MyToken}`,
+          },
+        }
+      );
+      console.log("🚀 ~ onSubmit ~ Response:", Response);
+      resetForm();
+      setSectionsDataReload(true);
+      setloading(false);
+      handleClose();
+    } catch (error) {
+      console.log("🚀 ~ error:", error);
+      setloading(false);
+    }
+  };
+  const {
+    values,
+    handleBlur,
+    handleChange: formikHandleChange,
+    touched,
+    handleSubmit,
+    resetForm,
+    errors,
+  } = useFormik({
+    initialValues: initialValues,
+    validationSchema: AddSectionSchemas,
+    onSubmit,
+  });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    formikHandleChange({
+      target: {
+        name,
+        value,
+      },
+    });
+  };
+
+  return (
+    <>
+      <Modal
+        size="md"
+        show={SectionsDataAddModel}
+        onHide={handleClose}
+        aria-labelledby="contained-modal-title-vcenter"
+        backdrop="static"
+        centered
+        style={{ backgroundColor: "rgba(32, 32, 32, 0.55)" }}
+      >
+        <Modal.Header closeButton className="model_title">
+          <Modal.Title style={{ textAlign: "center" }}>Add Section</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="modelbg_hastag">
+          <form action="" className="main_hastag_div" onSubmit={handleSubmit}>
+            <div className="main_input_container">
+              <label htmlFor=""> Add Section</label>
+              <div className="Input_box">
+                <input
+                  type="text"
+                  name="section"
+                  placeholder="Add Section"
+                  value={values.section}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+              </div>
+              {errors.section && touched.section ? (
+                <p className="errors_msg_p">{errors.section} </p>
+              ) : null}
+            </div>
+            <div className="btn_of_delte_model">
+              <Button
+                type="submit"
+                variant="primary"
+                style={{ background: "var(--primary-color-lightgreen)" }}
+              >
+                Submit
+              </Button>
+            </div>
+          </form>
+        </Modal.Body>
+      </Modal>
+      {loading && (
+        <div>
+          <Backdrop
+            sx={{
+              color: "#fff",
+              zIndex: (theme) => theme.zIndex.drawer + 1,
+              backgroundColor: "#000000bd",
+            }}
+            open={true}
+          >
+            <Loader />
+          </Backdrop>
+        </div>
+      )}
+    </>
+  );
+};
+// ? Add Section model end here
+// ? Edit Section model start here
+export const EditSectionModel = () => {
+  const {
+    SectionsDataEditModel,
+    setSectionsDataEditModel,
+    SelectedSectionsData,
+    setSelectedSectionsData,
+    SectionsDataReload,
+    setSectionsDataReload,
+  } = useContext(GlobalContext);
+
+  const [loading, setloading] = useState(false);
+
+  const handleClose = () => {
+    setSectionsDataEditModel(false);
+  };
+
+  const initialValues = {
+    section: "",
+  };
+
+  const MyToken = JSON.parse(localStorage.getItem("MYtokan"));
+  const onSubmit = async (value, { resetForm }) => {
+    setloading(true);
+    try {
+      const Response = await axios.post(
+        "section/manage-section",
+        {
+          type: "Edit",
+          name: values.section,
+          id: SelectedSectionsData.id,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `${MyToken}`,
+          },
+        }
+      );
+      console.log("🚀 ~ onSubmit ~ Response:", Response);
+      resetForm();
+      setSectionsDataReload(true);
+      setloading(false);
+      handleClose();
+    } catch (error) {
+      console.log("🚀 ~ error:", error);
+      setloading(false);
+    }
+  };
+  const {
+    values,
+    handleBlur,
+    handleChange: formikHandleChange,
+    touched,
+    handleSubmit,
+    resetForm,
+    errors,
+    setValues,
+  } = useFormik({
+    initialValues: initialValues,
+    // validationSchema: AddSectionSchemas,
+    onSubmit,
+  });
+  useEffect(() => {
+    if (SelectedSectionsData) {
+      setValues({
+        section: SelectedSectionsData?.section_name,
+      });
+    }
+  }, [SelectedSectionsData, setValues]);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    formikHandleChange({
+      target: {
+        name,
+        value,
+      },
+    });
+  };
+
+  return (
+    <>
+      <Modal
+        size="md"
+        show={SectionsDataEditModel}
+        onHide={handleClose}
+        aria-labelledby="contained-modal-title-vcenter"
+        backdrop="static"
+        centered
+        style={{ backgroundColor: "rgba(32, 32, 32, 0.55)" }}
+      >
+        <Modal.Header closeButton className="model_title">
+          <Modal.Title style={{ textAlign: "center" }}>
+            Edit Section
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="modelbg_hastag">
+          <form action="" className="main_hastag_div" onSubmit={handleSubmit}>
+            <div className="main_input_container">
+              <label htmlFor=""> Edit Section</label>
+              <div className="Input_box">
+                <input
+                  type="text"
+                  name="section"
+                  placeholder="Edit Section"
+                  value={values.section}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+              </div>
+              {errors.section && touched.section ? (
+                <p className="errors_msg_p">{errors.section} </p>
+              ) : null}
+            </div>
+            <div className="btn_of_delte_model">
+              <Button
+                type="submit"
+                variant="primary"
+                style={{ background: "var(--primary-color-lightgreen)" }}
+              >
+                Submit
+              </Button>
+            </div>
+          </form>
+        </Modal.Body>
+      </Modal>
+      {loading && (
+        <div>
+          <Backdrop
+            sx={{
+              color: "#fff",
+              zIndex: (theme) => theme.zIndex.drawer + 1,
+              backgroundColor: "#000000bd",
+            }}
+            open={true}
+          >
+            <Loader />
+          </Backdrop>
+        </div>
+      )}
+    </>
+  );
+};
+
+// ? Edit Section model end here
+// ? Delete Section model start here
+export const DeleteSectionModel = () => {
+  const {
+    SectionsDataDeleteModel,
+    setSectionsDataDeleteModel,
+
+    SelectedSectionsData,
+    setSelectedSectionsData,
+
+    SectionsDataReload,
+    setSectionsDataReload,
+  } = useContext(GlobalContext);
+  console.log(
+    "🚀 ~ DeleteSectionModel ~ SelectedSectionsData:",
+    SelectedSectionsData
+  );
+  const [loading, setloading] = useState(false);
+
+  const handleClose = () => {
+    setSectionsDataDeleteModel(false);
+  };
+
+  const MyToken = JSON.parse(localStorage.getItem("MYtokan"));
+  const DeleteSectionapi = async () => {
+    setloading(true);
+    try {
+      const Response = await axios.post(
+        "section/manage-section",
+        {
+          type: "Delete",
+          name: SelectedSectionsData.section_name,
+          id: SelectedSectionsData.id,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `${MyToken}`,
+          },
+        }
+      );
+
+      setSectionsDataReload(true);
+      setloading(false);
+      handleClose();
+    } catch (error) {
+      console.log("🚀 ~ error:", error);
+      setloading(false);
+    }
+  };
+  const handleDeletcall = () => {
+    DeleteSectionapi();
+    handleClose();
+  };
+
+  return (
+    <>
+      <Modal
+        size="md"
+        show={SectionsDataDeleteModel}
+        onHide={handleClose}
+        aria-labelledby="contained-modal-title-vcenter"
+        backdrop="static"
+        centered
+        style={{ backgroundColor: "rgba(32, 32, 32, 0.55)" }}
+      >
+        <Modal.Header closeButton className="model_title">
+          <Modal.Title style={{ textAlign: "center" }}>
+            Delete Section
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body closeButton className="modelbg">
+          <div className="Delete_text_p">
+            <p>Are you sure, you want to Delete this Section ?</p>
+          </div>
+
+          <div className="btn_of_delte_model">
+            <Button variant="secondary" onClick={handleClose}>
+              No
+            </Button>
+            <Button
+              variant="primary"
+              style={{ background: "var(--primary-color-lightgreen)" }}
+              onClick={() => handleDeletcall()}
+            >
+              Yes
+            </Button>
+          </div>
+        </Modal.Body>
+      </Modal>
+      {loading && (
+        <div>
+          <Backdrop
+            sx={{
+              color: "#fff",
+              zIndex: (theme) => theme.zIndex.drawer + 1,
+              backgroundColor: "#000000bd",
+            }}
+            open={true}
+          >
+            <Loader />
+          </Backdrop>
+        </div>
+      )}
+    </>
+  );
+};
+// ? Delete Section model end here
+
+// ! Sections items All models
+// ? Add Section items model start here
+export const AddSectionItemsModel = () => {
+  const {
+    SectionsItemsAddModel,
+    setSectionsItemsAddModel,
+    SectionsItemsReload,
+    setSectionsItemsReload,
+  } = useContext(GlobalContext);
+  const [loading, setloading] = useState(false);
+
+  const handleClose = () => {
+    setSectionsItemsAddModel(false);
+  };
+
+  const initialValues = {
+    question: "",
+    answer: "",
+  };
+
+  const MyToken = JSON.parse(localStorage.getItem("MYtokan"));
+  const sectionId = JSON.parse(localStorage.getItem("sectionId"));
+
+  const onSubmit = async (value, { resetForm }) => {
+    setloading(true);
+    try {
+      const Response = await axios.post(
+        "section/manage-section-data",
+        {
+          type: "Add", // Add , Edit , Delete
+          id: 0, // if type= Add then send 0 , for other send a id
+          section_id: sectionId,
+          question: values.question,
+          answer: values.answer,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `${MyToken}`,
+          },
+        }
+      );
+      handleClose();
+      setloading(false);
+      console.log("🚀 ~ onSubmit ~ Response:", Response);
+      setSectionsItemsReload(true);
+      resetForm();
+    } catch (error) {
+      console.log("🚀 ~ error:", error);
+      setloading(false);
+    }
+  };
+  const {
+    values,
+    handleBlur,
+    handleChange: formikHandleChange,
+    touched,
+    handleSubmit,
+    resetForm,
+    errors,
+  } = useFormik({
+    initialValues: initialValues,
+    validationSchema: AddSectionItemsSchemas,
+    onSubmit,
+  });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    formikHandleChange({
+      target: {
+        name,
+        value,
+      },
+    });
+  };
+
+  return (
+    <>
+      <Modal
+        size="md"
+        show={SectionsItemsAddModel}
+        onHide={handleClose}
+        aria-labelledby="contained-modal-title-vcenter"
+        backdrop="static"
+        centered
+        style={{ backgroundColor: "rgba(32, 32, 32, 0.55)" }}
+      >
+        <Modal.Header closeButton className="model_title">
+          <Modal.Title style={{ textAlign: "center" }}>
+            Add Section Items
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="modelbg_hastag">
+          <form action="" className="main_hastag_div" onSubmit={handleSubmit}>
+            <div className="main_input_container">
+              <label htmlFor=""> Add Question</label>
+              <div className="Input_box">
+                <input
+                  type="text"
+                  name="question"
+                  placeholder="Add Question"
+                  value={values.question}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+              </div>
+              {errors.question && touched.question ? (
+                <p className="errors_msg_p">{errors.question} </p>
+              ) : null}
+            </div>
+            <div className="main_input_container">
+              <label htmlFor=""> Add Answer</label>
+              <div className="textarea_box">
+                <textarea
+                  name="answer"
+                  placeholder="Add Answer"
+                  value={values.answer}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                ></textarea>
+              </div>
+              {errors.answer && touched.answer ? (
+                <p className="errors_msg_p">{errors.answer} </p>
+              ) : null}
+            </div>
+            <div className="btn_of_delte_model">
+              <Button
+                type="submit"
+                variant="primary"
+                style={{ background: "var(--primary-color-lightgreen)" }}
+              >
+                Submit
+              </Button>
+            </div>
+          </form>
+        </Modal.Body>
+      </Modal>
+      {loading && (
+        <div>
+          <Backdrop
+            sx={{
+              color: "#fff",
+              zIndex: (theme) => theme.zIndex.drawer + 1,
+              backgroundColor: "#000000bd",
+            }}
+            open={true}
+          >
+            <Loader />
+          </Backdrop>
+        </div>
+      )}
+    </>
+  );
+};
+// ? Add Section items model end here
+// ? Edit Section items model start here
+export const EditSectionItemsModel = () => {
+  const {
+    SectionsItemsEditModel,
+    setSectionsItemsEditModel,
+    SelectedSectionsItemsData,
+    setSelectedSectionsItemsData,
+    SectionsItemsReload,
+    setSectionsItemsReload,
+  } = useContext(GlobalContext);
+  const [loading, setloading] = useState(false);
+
+  const handleClose = () => {
+    setSectionsItemsEditModel(false);
+  };
+
+  const initialValues = {
+    question: "",
+    answer: "",
+  };
+
+  const MyToken = JSON.parse(localStorage.getItem("MYtokan"));
+  const SectionId = JSON.parse(localStorage.getItem("sectionId"));
+
+  const onSubmit = async (value, { resetForm }) => {
+    setloading(true);
+    try {
+      const Response = await axios.post(
+        "section/manage-section-data",
+        {
+          type: "Edit", // Add , Edit , Delete
+          id: SelectedSectionsItemsData.id, // if type= Add then send 0 , for other send a id
+          section_id: SectionId,
+          question: values.question,
+          answer: values.answer,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `${MyToken}`,
+          },
+        }
+      );
+      console.log("🚀 ~ onSubmit ~ Response:", Response);
+      resetForm();
+      setSectionsItemsReload(true);
+      setSelectedSectionsItemsData(null);
+
+      setloading(false);
+      handleClose();
+    } catch (error) {
+      console.log("🚀 ~ error:", error);
+      setloading(false);
+    }
+  };
+  const {
+    values,
+    handleBlur,
+    handleChange: formikHandleChange,
+    touched,
+    handleSubmit,
+    resetForm,
+    errors,
+    setValues,
+  } = useFormik({
+    initialValues: initialValues,
+    validationSchema: AddSectionItemsSchemas,
+    onSubmit,
+  });
+  useEffect(() => {
+    if (SelectedSectionsItemsData) {
+      setValues({
+        question: SelectedSectionsItemsData?.question,
+        answer: SelectedSectionsItemsData?.answer,
+      });
+    }
+  }, [SelectedSectionsItemsData, setValues]);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    formikHandleChange({
+      target: {
+        name,
+        value,
+      },
+    });
+  };
+
+  return (
+    <>
+      <Modal
+        size="md"
+        show={SectionsItemsEditModel}
+        onHide={handleClose}
+        aria-labelledby="contained-modal-title-vcenter"
+        backdrop="static"
+        centered
+        style={{ backgroundColor: "rgba(32, 32, 32, 0.55)" }}
+      >
+        <Modal.Header closeButton className="model_title">
+          <Modal.Title style={{ textAlign: "center" }}>
+            Edit Section Items
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="modelbg_hastag">
+          <form action="" className="main_hastag_div" onSubmit={handleSubmit}>
+            <div className="main_input_container">
+              <label htmlFor=""> Edit Question</label>
+              <div className="Input_box">
+                <input
+                  type="text"
+                  name="question"
+                  placeholder="Edit Question"
+                  value={values.question}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+              </div>
+              {errors.question && touched.question ? (
+                <p className="errors_msg_p">{errors.question} </p>
+              ) : null}
+            </div>
+            <div className="main_input_container">
+              <label htmlFor=""> Edit Answer</label>
+              <div className="textarea_box">
+                <textarea
+                  name="answer"
+                  placeholder="Edit Answer"
+                  value={values.answer}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                ></textarea>
+              </div>
+              {errors.answer && touched.answer ? (
+                <p className="errors_msg_p">{errors.answer} </p>
+              ) : null}
+            </div>
+            <div className="btn_of_delte_model">
+              <Button
+                type="submit"
+                variant="primary"
+                style={{ background: "var(--primary-color-lightgreen)" }}
+              >
+                Submit
+              </Button>
+            </div>
+          </form>
+        </Modal.Body>
+      </Modal>
+      {loading && (
+        <div>
+          <Backdrop
+            sx={{
+              color: "#fff",
+              zIndex: (theme) => theme.zIndex.drawer + 1,
+              backgroundColor: "#000000bd",
+            }}
+            open={true}
+          >
+            <Loader />
+          </Backdrop>
+        </div>
+      )}
+    </>
+  );
+};
+// ? Edit Section items model end here
+// ? Delete Section items model start here
+export const DeleteSectionItemsModel = () => {
+  const {
+    SectionsItemsDeleteModel,
+    setSectionsItemsDeleteModel,
+    SelectedSectionsItemsData,
+    setSelectedSectionsItemsData,
+    SectionsItemsReload,
+    setSectionsItemsReload,
+  } = useContext(GlobalContext);
+  const [loading, setloading] = useState(false);
+
+  const handleClose = () => {
+    setSectionsItemsDeleteModel(false);
+  };
+
+  const MyToken = JSON.parse(localStorage.getItem("MYtokan"));
+  const SectionId = JSON.parse(localStorage.getItem("sectionId"));
+  const DeleteSectionItemsapi = async () => {
+    setloading(true);
+    try {
+      const Response = await axios.post(
+        "section/manage-section-data",
+        {
+          type: "Delete",
+          id: SelectedSectionsItemsData.id,
+          section_id: SectionId,
+          question: SelectedSectionsItemsData.question,
+          answer: SelectedSectionsItemsData.answer,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `${MyToken}`,
+          },
+        }
+      );
+
+      setSectionsItemsReload(true);
+      setSelectedSectionsItemsData(null);
+      console.log("🚀 ~ DeleteSectionItemsapi ~ Response:", Response);
+      setloading(false);
+      handleClose();
+    } catch (error) {
+      console.log("🚀 ~ error:", error);
+      setloading(false);
+    }
+  };
+  const handleDeletcall = () => {
+    DeleteSectionItemsapi();
+    handleClose();
+  };
+
+  return (
+    <>
+      <Modal
+        size="md"
+        show={SectionsItemsDeleteModel}
+        onHide={handleClose}
+        aria-labelledby="contained-modal-title-vcenter"
+        backdrop="static"
+        centered
+        style={{ backgroundColor: "rgba(32, 32, 32, 0.55)" }}
+      >
+        <Modal.Header closeButton className="model_title">
+          <Modal.Title style={{ textAlign: "center" }}>
+            Delete Section Items
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body closeButton className="modelbg">
+          <div className="Delete_text_p">
+            <p>Are you sure, you want to Delete this Section Item ?</p>
+          </div>
+
+          <div className="btn_of_delte_model">
+            <Button variant="secondary" onClick={handleClose}>
+              No
+            </Button>
+            <Button
+              variant="primary"
+              style={{ background: "var(--primary-color-lightgreen)" }}
+              onClick={() => handleDeletcall()}
+            >
+              Yes
+            </Button>
+          </div>
+        </Modal.Body>
+      </Modal>
+      {loading && (
+        <div>
+          <Backdrop
+            sx={{
+              color: "#fff",
+              zIndex: (theme) => theme.zIndex.drawer + 1,
+              backgroundColor: "#000000bd",
+            }}
+            open={true}
+          >
+            <Loader />
+          </Backdrop>
+        </div>
+      )}
+    </>
+  );
+};
+// ? Delete Section items model end here
+
+// ? for Support view data model in this model  we have to show the support data like ( name , email , subject, description, screenshot image )
+export const SupportViewDataModel = () => {
+  const {
+    SupportsViewModel,
+    setSupportsViewModel,
+    SupportsCheckModel,
+    setSupportsCheckModel,
+    SupportsReload,
+    setSupportsReload,
+    SelectedSupportsdata,
+    setSelectedSupportsdata,
+  } = useContext(GlobalContext);
+  const [loading, setloading] = useState(false);
+
+  const handleClose = () => {
+    setSupportsViewModel(false);
+  };
+
+  return (
+    <>
+      <Modal
+        size="md"
+        show={SupportsViewModel}
+        onHide={handleClose}
+        aria-labelledby="contained-modal-title-vcenter"
+        backdrop="static"
+        centered
+        style={{ backgroundColor: "rgba(32, 32, 32, 0.55)" }}
+      >
+        <Modal.Header closeButton className="model_title">
+          <Modal.Title style={{ textAlign: "center" }}>
+            Support View Data
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="modelbg_hastag">
+          <div className="support_view_data_div">
+            <p>
+              <span>Name:</span> {SelectedSupportsdata?.name}
+            </p>
+            <p>
+              <span>Email:</span> {SelectedSupportsdata?.email}
+            </p>
+            <p>
+              <span>Subject:</span> {SelectedSupportsdata?.subject}
+            </p>
+            <p>
+              <span>Description:</span> {SelectedSupportsdata?.description}
+            </p>
+            <div className="support_view_data_image_div">
+              <span>Screenshot:</span>
+              {SelectedSupportsdata?.screenshot ? (
+                <img
+                  src={SelectedSupportsdata?.screenshot}
+                  alt="screenshot"
+                  className="support_view_data_image"
+                />
+              ) : (
+                <p className="no_image_p">
+                  The user did not attach a screenshot for this request.
+                </p>
+              )}
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
+      {loading && (
+        <div>
+          <Backdrop
+            sx={{
+              color: "#fff",
+              zIndex: (theme) => theme.zIndex.drawer + 1,
+              backgroundColor: "#000000bd",
+            }}
+            open={true}
+          >
+            <Loader />
+          </Backdrop>
+        </div>
+      )}
+    </>
+  );
+};
+// ? Support view data model end here
+
+// ? Support check model in this model we have to check  this data is is read by admin we have intigrati to one post method api upport/contactus-mark-as-read this my end point and this api will take id and show tost message those message we get and in resposnse
+export const SupportCheckModel = () => {
+  const {
+    SupportsCheckModel,
+    setSupportsCheckModel,
+    SelectedSupportsdata,
+    setSelectedSupportsdata,
+    SupportsReload,
+    setSupportsReload,
+  } = useContext(GlobalContext);
+  const [loading, setloading] = useState(false);
+
+  const handleClose = () => {
+    setSupportsCheckModel(false);
+  };
+
+  const MyToken = JSON.parse(localStorage.getItem("MYtokan"));
+  const SupportCheckApi = async () => {
+    setloading(true);
+    try {
+      const Response = await axios.post(
+        "support/contactus-mark-as-read",
+        {
+          id: SelectedSupportsdata.id,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `${MyToken}`,
+          },
+        }
+      );
+      console.log("🚀 ~ SupportCheckApi ~ Response:", Response);
+      setSupportsReload(true);
+      setSelectedSupportsdata(null);
+      setloading(false);
+      handleClose();
+    } catch (error) {
+      console.log("🚀 ~ error:", error);
+      setloading(false);
+    }
+  };
+  const handleCheckcall = () => {
+    SupportCheckApi();
+    handleClose();
+  };
+
+  return (
+    <>
+      <Modal
+        size="md"
+        show={SupportsCheckModel}
+        onHide={handleClose}
+        aria-labelledby="contained-modal-title-vcenter"
+        backdrop="static"
+        centered
+        style={{ backgroundColor: "rgba(32, 32, 32, 0.55)" }}
+      >
+        <Modal.Header closeButton className="model_title">
+          <Modal.Title style={{ textAlign: "center" }}>
+            Support Check Data
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body closeButton className="modelbg">
+          <div className="Delete_text_p">
+            <p>Are you sure, you want to mark this support as read ?</p>
+          </div>
+
+          <div className="btn_of_delte_model">
+            <Button variant="secondary" onClick={handleClose}>
+              No
+            </Button>
+            <Button
+              variant="primary"
+              style={{ background: "var(--primary-color-lightgreen)" }}
+              onClick={() => handleCheckcall()}
             >
               Yes
             </Button>
